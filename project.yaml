@@ -1,0 +1,8 @@
+- project:
+    name: openstack/ironic
+    check:
+      jobs:
+        - lenovo-xclarity-ironic-power-on.yaml
+        - lenovo-xclarity-ironic-power-off.yaml
+        - lenovo-xclarity-ironic-get-bootorder.yaml
+        - lenovo-xclarity-ironic-set-bootorder.yaml
