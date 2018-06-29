@@ -6,8 +6,8 @@
     post-run: playbooks/post-logs.yaml
 
 - job:
-    name: lenovo-xclarity-ironic-power-on
-    description: A job to test xclarity driver power on for Lenovo XClarity Managed Server
+    name: lenovo-xclarity-ironic
+    description: A job to test xclarity driver for Lenovo XClarity Managed Server
     timeout: 10800
     parent: base
     irrelevant-files:
@@ -22,77 +22,10 @@
       - ^setup.cfg$
       - ^tools/.*$
       - ^tox.ini$
-    run: playbooks/lenovo-xclarity-ironic-power-on.yaml
+    run: playbooks/lenovo-xclarity-ironic.yaml
     nodeset:
       nodes:
         - name: ubuntu
           label: cloud
-
-- job:
-    name: lenovo-xclarity-ironic-power-off
-    description: A job to test xclarity driver power off for Lenovo XClarity Managed Server
-    timeout: 10800
-    parent: base
-    irrelevant-files:
-      - ^(test-|driver-)requirements.txt$
-      - ^.*\.rst$
-      - ^api-ref/.*$
-      - ^doc/.*$
-      - ^install-guide/.*$
-      - ^ironic/locale/.*$
-      - ^ironic/tests/.*$
-      - ^releasenotes/.*$
-      - ^setup.cfg$
-      - ^tools/.*$
-      - ^tox.ini$
-    run: playbooks/lenovo-xclarity-ironic-power-off.yaml
-    nodeset:
-      nodes:
-        - name: ubuntu
-          label: cloud
-
-- job:
-    name: lenovo-xclarity-ironic-get-bootorder
-    description: A job to test xclarity driver get bootorder for Lenovo XClarity Managed Server
-    timeout: 10800
-    parent: base
-    irrelevant-files:
-      - ^(test-|driver-)requirements.txt$
-      - ^.*\.rst$
-      - ^api-ref/.*$
-      - ^doc/.*$
-      - ^install-guide/.*$
-      - ^ironic/locale/.*$
-      - ^ironic/tests/.*$
-      - ^releasenotes/.*$
-      - ^setup.cfg$
-      - ^tools/.*$
-      - ^tox.ini$
-    run: playbooks/lenovo-xclarity-ironic-get-bootorder.yaml
-    nodeset:
-      nodes:
-        - name: ubuntu
-
-- job:
-    name: lenovo-xclarity-ironic-set-bootorder
-    description: A job to test xclarity driver set bootorder for Lenovo XClarity Managed Server
-    timeout: 10800
-    parent: base
-    irrelevant-files:
-      - ^(test-|driver-)requirements.txt$
-      - ^.*\.rst$
-      - ^api-ref/.*$
-      - ^doc/.*$
-      - ^install-guide/.*$
-      - ^ironic/locale/.*$
-      - ^ironic/tests/.*$
-      - ^releasenotes/.*$
-      - ^setup.cfg$
-      - ^tools/.*$
-      - ^tox.ini$
-    run: playbooks/lenovo-xclarity-ironic-set-bootorder.yaml
-    nodeset:
-      nodes:
-        - name: ubuntu
 
 label: cloud
