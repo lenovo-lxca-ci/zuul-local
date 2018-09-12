@@ -24,4 +24,4 @@
       gerrit:
         Verified: -1
       github:
-status: 'failure'
+        status: 'failure'

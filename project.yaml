@@ -1,6 +1,6 @@
 - project:
-    name: openstack/ironic
-    #name: openstack-dev/ci-sandbox
+    #name: openstack/ironic
+    name: openstack-dev/ci-sandbox
     check:
       jobs:
         - lenovo-xclarity-ironic
