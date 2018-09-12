@@ -1,11 +1,15 @@
 - pipeline:
     name: check
-    manager: independent
+    description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from zuul v3.
+    failure-message: "Build failed.  To recheck use 'lenovo-lxca recheck'.  For 3rd party ci contact info: https://wiki.openstack.org/wiki/ThirdPartySystems"
+    #manager: independent
+    manager: IndependentPipelineManager
     trigger:
       gerrit:
         - event: patchset-created
+        - event: change-restored
         - event: comment-added
-          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*lxcarecheck
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*(recheck|lenovo-lxca recheck|lenovo recheck|lxca recheck)\s*$
       github:
         - event: pull_request
           action:
@@ -25,3 +29,10 @@
         Verified: -1
       github:
         status: 'failure'
+    merge-failure:
+      smtp:
+        #TODO: Update these to real e-mail addresses
+        to: lenovo.lxca.ci@gmail.com
+        from: zuul@example.com
+        subject: Upstream change {change} has a merge failure
+

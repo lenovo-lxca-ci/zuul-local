@@ -7,7 +7,7 @@
 
 - job:
     name: lenovo-xclarity-ironic
-    description: A job to test xclarity driver for Lenovo XClarity Managed Server
+    description: A job to test XClarity driver
     timeout: 10800
     parent: base
     irrelevant-files:
