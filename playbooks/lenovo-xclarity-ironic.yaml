@@ -26,4 +26,4 @@
 
       always:
         - name: Deallocating test node
-shell: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/release_molten.py {{ uuid.stdout }}
+          shell: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/release_molten.py {{ uuid.stdout }}
