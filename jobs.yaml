@@ -25,7 +25,5 @@
     run: playbooks/lenovo-xclarity-ironic.yaml
     nodeset:
       nodes:
-        - name: ubuntu
-          label: cloud
-
-label: cloud
+        - name: 10.240.24.147
+          label: ubuntu-xenial
