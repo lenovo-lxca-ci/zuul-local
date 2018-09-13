@@ -3,7 +3,7 @@
     parent: null
     description: The base job not using openstack/ironic roles
     timeout: 10800
-    #post-run: playbooks/post-logs.yaml
+    post-run: playbooks/post-logs.yaml
 
 - job:
     name: lenovo-xclarity-ironic
