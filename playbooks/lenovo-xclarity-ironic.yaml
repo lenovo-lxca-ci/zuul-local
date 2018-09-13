@@ -1,0 +1,29 @@
+- hosts: all
+  name: Lenovo XClarity job
+  tasks:
+
+    - name: Create workspace directory to run xclarity
+      file:
+        path: '/tmp/xclarity'
+        state: directory
+
+    - block:
+        - name: Clonning devstack-gate for xclarity
+          shell: cd /tmp/xclarity; git clone https://github.com/lenovo-lxca-ci/LENOVO-CI-JOBS.git
+
+        - name: Configure molten
+          shell: sudo bash /tmp/xclarity/LENOVO-CI-JOBS/molteniron/configure_molten
+
+        - name: Generate MoltenIron Id for node
+          command: uuidgen
+          register: uuid
+
+        - name: Allocating test node
+          command: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} X3650
+
+        - name: Running xclarity
+          shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
+
+      always:
+        - name: Deallocating test node
+          shell: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/release_molten.py {{ uuid.stdout }}

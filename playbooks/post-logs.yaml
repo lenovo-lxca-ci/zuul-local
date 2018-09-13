@@ -1,0 +1,84 @@
+- hosts: all
+  tasks:
+    - name: Set log path for a change
+      when: zuul.change is defined
+      set_fact:
+        log_path: "{{ zuul.change[-2:] }}/{{ zuul.change }}/{{ zuul.patchset }}/{{ zuul.pipeline }}/{{ zuul.job }}/{{ zuul.build[:7] }}"
+
+    - name: Set log path for a ref update
+      when: zuul.newrev is defined
+      set_fact:
+        log_path: "{{ zuul.newrev[-2:] }}/{{ zuul.newrev }}/{{ zuul.pipeline }}/{{ zuul.job }}/{{ zuul.build[:7] }}"
+
+    - name: Set log path for a periodic job
+      when: zuul.change is not defined and zuul.newrev is not defined
+      set_fact:
+        log_path: "{{ zuul.pipeline }}/{{ zuul.job }}/{{ zuul.build[:7] }}"
+
+    - name: Preparing file for logs
+      tempfile:
+        state: file
+      register: tmpe
+      no_log: true
+
+    - name: Create log directory
+      file:
+         path: /tmp/new_zuul
+         state: directory
+         owner: ubuntu
+         group: ubuntu
+         mode: 0775     
+
+    - block:
+        - name: Preparing logs
+          copy:
+            content: |
+              sshpass -p ironic2018 ssh -o StrictHostKeyChecking=no ironic@10.240.24.140 "mkdir -p /var/www/logs/{{ log_path }}/"
+              sshpass -p ironic2018 ssh -o StrictHostKeyChecking=no zuul@10.240.24.139 "sudo chown -R zuul.zuul {{ zuul.executor.log_root }}"
+              sshpass -p ironic2018 ssh -o StrictHostKeyChecking=no zuul@10.240.24.139 "sudo chmod -R 0777 /tmp; sudo chown -R zuul.zuul /tmp"
+              sshpass -p ironic2018 scp -o StrictHostKeyChecking=no -r zuul@10.240.24.139:{{ zuul.executor.log_root }} /tmp/new_zuul/
+
+              sudo journalctl -u devstack@dstat.service >>/tmp/dstat.service 2>/dev/null
+              sudo journalctl -u devstack@etcd.service >>/tmp/etcd.service 2>/dev/null
+              sudo journalctl -u devstack@g-api.service >>/tmp/g-api.service 2>/dev/null
+              sudo journalctl -u devstack@g-reg.service >>/tmp/g-reg.service 2>/dev/null
+              sudo journalctl -u devstack@ir-api.service >>/tmp/ir-api.service 2>/dev/null
+              sudo journalctl -u devstack@ir-cond.service >>/tmp/ir-cond.service 2>/dev/null
+              sudo journalctl -u devstack@keystone.service >>/tmp/keystone.service 2>/dev/null
+              sudo journalctl -u devstack@q-l3.service >>/tmp/q-l3.service 2>/dev/null
+              sudo journalctl -u devstack@q-agt.service >>/tmp/q-agt.service 2>/dev/null
+              sudo journalctl -u devstack@q-dhcp.service >>/tmp/q-dhcp.service 2>/dev/null
+              sudo journalctl -u devstack@q-meta.service >>/tmp/q-meta.service 2>/dev/null
+              sudo journalctl -u devstack@s-account.service >>/tmp/s-account.service 2>/dev/null
+              sudo journalctl -u devstack@q-svc.service >>/tmp/q-svc.service 2>/dev/null
+              sudo journalctl -u devstack@s-container-sync.service >>/tmp/s-container-sync.service 2>/dev/null
+              sudo journalctl -u devstack@s-container.service >>/tmp/s-container.service 2>/dev/null
+              sudo journalctl -u devstack@s-object.service >>/tmp/s-object.service 2>/dev/null
+              sudo journalctl -u devstack@s-proxy.service >>/tmp/s-proxy.service 2>/dev/null
+
+              mkdir -p /tmp/new_zuul/etc
+              sudo cp -r /etc/glance/ /etc/ironic/ /etc/keystone /etc/neutron /etc/nova /etc/swift /tmp/new_zuul/etc/
+              sshpass -p ironic2018 scp -o StrictHostKeyChecking=no /tmp/*.service ironic@10.240.24.140:/var/www/logs/{{ log_path }}/ 2>/dev/null
+          
+              if [ -d /tmp/new_zuul ]; then
+                 echo "Pasting log path"
+                 sshpass -p ubuntu scp -o StrictHostKeyChecking=no -r /tmp/new_zuul/* ubuntu@10.240.24.140:/var/www/logs/{{ log_path }}/
+              fi
+              if [ -d /tmp/devstack_logs/ ]; then
+                 sshpass -p ubuntu scp -o StrictHostKeyChecking=no -r /tmp/devstack_logs/ ubuntu@10.240.24.140:/var/www/logs/{{ log_path }}/
+              fi
+              sshpass -p ubuntu scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf ubuntu@10.240.24.140:/var/www/logs/{{ log_path }}/local.conf
+            dest: "{{ tmpe.path }}"
+            mode: 0777
+          no_log: true
+          become: true
+
+        - name: Posting logs to logserver
+          shell: bash {{ tmpe.path }}
+      always:
+        - name: Post logs to gerrit
+          delegate_to: localhost
+          zuul_return:
+            data:
+              zuul:
+                log_url: "http://x.x.x.x/{{ log_path }}/"
