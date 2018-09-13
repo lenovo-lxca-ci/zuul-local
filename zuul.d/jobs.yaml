@@ -22,7 +22,7 @@
       - ^setup.cfg$
       - ^tools/.*$
       - ^tox.ini$
-    run: playbooks/lenovo-xclarity-ironic.yaml
+    #run: playbooks/lenovo-xclarity-ironic.yaml
     nodeset:
       nodes:
         - name: 10.240.24.147
