@@ -24,7 +24,6 @@
       - ^tox.ini$
     run: playbooks/lenovo-xclarity-ironic.yaml
     nodeset:
-      name: static-vms
       nodes:
         - name: 10.240.24.147
           label: ubuntu-xenial
