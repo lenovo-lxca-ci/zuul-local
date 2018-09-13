@@ -2,7 +2,7 @@
     name: check
     description: Newly uploaded patchsets enter this pipeline to receive an initial +/-1 Verified vote from zuul v3.
     failure-message: "Build failed.  To recheck use 'lenovo-lxca recheck'.  For 3rd party ci contact info: https://wiki.openstack.org/wiki/ThirdPartySystems"
-    manager: IndependentPipelineManager
+    manager: independent
     trigger:
       gerrit:
         - event: patchset-created
