@@ -4,8 +4,9 @@
     description: The base job not using openstack/ironic roles
     timeout: 10800
     post-run: playbooks/post-logs.yaml
-    #    secrets:
-    #      - site_logs
+    secrets:
+      - name: site_logs
+        secret: site_logs
 
 - job:
     name: lenovo-xclarity-ironic
