@@ -19,7 +19,7 @@
       tempfile:
         state: file
       register: tmpe
-      no_log: true
+      no_log: false
 
     - name: Create log directory
       file:
