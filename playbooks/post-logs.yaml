@@ -25,8 +25,8 @@
       file:
          path: /tmp/new_zuul
          state: directory
-         owner: ironic
-         group: ironic
+         owner: zuul
+         group: zuul
          mode: 0775     
 
     - block:
