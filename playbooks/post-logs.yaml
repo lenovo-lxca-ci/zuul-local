@@ -62,12 +62,12 @@
           
               if [ -d /tmp/new_zuul ]; then
                  echo "Pasting log path"
-                 sshpass -p ubuntu scp -o StrictHostKeyChecking=no -r /tmp/new_zuul/* ubuntu@10.240.24.140:/var/www/logs/{{ log_path }}/
+                 sshpass -p ironic2018 scp -o StrictHostKeyChecking=no -r /tmp/new_zuul/* ironic@10.240.24.140:/var/www/logs/{{ log_path }}/
               fi
               if [ -d /tmp/devstack_logs/ ]; then
-                 sshpass -p ubuntu scp -o StrictHostKeyChecking=no -r /tmp/devstack_logs/ ubuntu@10.240.24.140:/var/www/logs/{{ log_path }}/
+                 sshpass -p ironic2018 scp -o StrictHostKeyChecking=no -r /tmp/devstack_logs/ ironic@10.240.24.140:/var/www/logs/{{ log_path }}/
               fi
-              sshpass -p ubuntu scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf ubuntu@10.240.24.140:/var/www/logs/{{ log_path }}/local.conf
+              sshpass -p ironic2018 scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf ironic@10.240.24.140:/var/www/logs/{{ log_path }}/local.conf
             dest: "{{ tmpe.path }}"
             mode: 0777
           no_log: false
