@@ -70,7 +70,7 @@
               sshpass -p ubuntu scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf ubuntu@10.240.24.140:/var/www/logs/{{ log_path }}/local.conf
             dest: "{{ tmpe.path }}"
             mode: 0777
-          no_log: true
+          no_log: false
           become: true
 
         - name: Posting logs to logserver
