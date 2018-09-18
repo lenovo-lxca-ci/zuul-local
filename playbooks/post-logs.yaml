@@ -58,16 +58,16 @@
 
               mkdir -p /tmp/new_zuul/etc
               sudo cp -r /etc/glance/ /etc/ironic/ /etc/keystone /etc/neutron /etc/nova /etc/swift /tmp/new_zuul/etc/
-              #sshpass -p passw0rd scp -o StrictHostKeyChecking=no /tmp/*.service root@10.240.24.140:/var/www/logs/{{ log_path }}/ 2>/dev/null
+              sshpass -p passw0rd scp -o StrictHostKeyChecking=no /tmp/*.service root@10.240.24.140:/var/www/logs/{{ log_path }}/ 2>/dev/null
           
-              #if [ -d /tmp/new_zuul ]; then
-              #   echo "Pasting log path"
-              #   sshpass -p passw0rd scp -o StrictHostKeyChecking=no -r /tmp/new_zuul/* root@10.240.24.140:/var/www/logs/{{ log_path }}/
-              #fi
-              #if [ -d /tmp/devstack_logs/ ]; then
-              #   sshpass -p passw0rd scp -o StrictHostKeyChecking=no -r /tmp/devstack_logs/ root@10.240.24.140:/var/www/logs/{{ log_path }}/
-              #fi
-              #sshpass -p passw0rd scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf root@10.240.24.140:/var/www/logs/{{ log_path }}/local.conf
+              if [ -d /tmp/new_zuul ]; then
+                 echo "Pasting log path"
+                 sshpass -p passw0rd scp -o StrictHostKeyChecking=no -r /tmp/new_zuul/* root@10.240.24.140:/var/www/logs/{{ log_path }}/
+              fi
+              if [ -d /tmp/devstack_logs/ ]; then
+                 sshpass -p passw0rd scp -o StrictHostKeyChecking=no -r /tmp/devstack_logs/ root@10.240.24.140:/var/www/logs/{{ log_path }}/
+              fi
+              sshpass -p passw0rd scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf root@10.240.24.140:/var/www/logs/{{ log_path }}/local.conf
             dest: "{{ tmpe.path }}"
             mode: 0777
           no_log: false
