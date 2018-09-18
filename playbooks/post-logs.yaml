@@ -33,7 +33,7 @@
         - name: Preparing logs
           copy:
             content: |
-              sshpass -p passw0rd ssh -o StrictHostKeyChecking=no root@10.240.24.140 "mkdir -p /var/www/logs/{{ log_path }}/"
+              #sshpass -p passw0rd ssh -o StrictHostKeyChecking=no root@10.240.24.140 "mkdir -p /var/www/logs/{{ log_path }}/"
               #sshpass -p ironic2018 ssh -o StrictHostKeyChecking=no zuul@10.240.24.139 "sudo chown -R zuul.zuul {{ zuul.executor.log_root }}"
               #sshpass -p ironic2018 ssh -o StrictHostKeyChecking=no zuul@10.240.24.139 "sudo chmod -R 0777 /tmp; sudo chown -R zuul.zuul /tmp"
               #sshpass -p ironic2018 scp -o StrictHostKeyChecking=no -r zuul@10.240.24.139:{{ zuul.executor.log_root }} /tmp/new_zuul/
@@ -56,7 +56,7 @@
               #sudo journalctl -u devstack@s-object.service >>/tmp/s-object.service 2>/dev/null
               #sudo journalctl -u devstack@s-proxy.service >>/tmp/s-proxy.service 2>/dev/null
 
-              #mkdir -p /tmp/new_zuul/etc
+              mkdir -p /tmp/new_zuul/etc
               #sudo cp -r /etc/glance/ /etc/ironic/ /etc/keystone /etc/neutron /etc/nova /etc/swift /tmp/new_zuul/etc/
               #sshpass -p ironic2018 scp -o StrictHostKeyChecking=no /tmp/*.service ironic@10.240.24.140:/var/www/logs/{{ log_path }}/ 2>/dev/null
           
