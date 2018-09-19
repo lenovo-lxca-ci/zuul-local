@@ -4,6 +4,10 @@
     description: The base job not using openstack/ironic roles
     timeout: 10800
     post-run: playbooks/post-logs.yaml
+    nodeset:
+      nodes:
+        - name: 10.240.24.147
+          label: ubuntu-xenial
 
 - job:
     name: lenovo-xclarity-ironic
