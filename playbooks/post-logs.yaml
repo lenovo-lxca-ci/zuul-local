@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: 10.240.24.138 #all
   tasks:
     - name: Set log path for a change
       when: zuul.change is defined

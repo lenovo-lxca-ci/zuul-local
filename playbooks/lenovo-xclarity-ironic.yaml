@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: 10.240.24.138 #all
   name: Lenovo XClarity job
   tasks:
     - name: Create workspace directory to run xclarity
