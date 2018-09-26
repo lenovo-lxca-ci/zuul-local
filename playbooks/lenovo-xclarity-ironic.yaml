@@ -11,7 +11,7 @@
           shell: |
             cd /tmp/xclarity
             if [[ -e LENOVO-CI-JOBS ]]; then
-              rm -rf LENOVO-CI-JOBS
+              sudo rm -rf LENOVO-CI-JOBS
             fi
             git clone https://github.com/lenovo-lxca-ci/LENOVO-CI-JOBS.git
     
