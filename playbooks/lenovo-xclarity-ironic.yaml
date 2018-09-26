@@ -6,14 +6,15 @@
         path: '/tmp/xclarity'
         state: directory
 
+    - name: Remove old jobs repository
+      shell: |
+        cd /tmp/xclarity
+        if [[ -e LENOVO-CI-JOBS ]]; then
+          sudo rm -rf LENOVO-CI-JOBS
+        fi
+
     - block:
-        - name: Remove old jobs repository
-          shell: |
-            cd /tmp/xclarity
-            if [[ -e LENOVO-CI-JOBS ]]; then
-              sudo rm -rf LENOVO-CI-JOBS
-            fi
-        - name: Clonning devstack-gate for xclarity
+        - name: Clonning Lenovo defined jobs for xclarity
           shell: |
             cd /tmp/xclarity
             git clone https://github.com/lenovo-lxca-ci/LENOVO-CI-JOBS.git
