@@ -1,17 +1,17 @@
 - hosts: all
   name: Lenovo XClarity job
   tasks:
+    - name: Remove old jobs repository
+      shell: |
+        cd /tmp
+        if [[ -e xclarity ]]; then
+          sudo rm -rf xclarity
+        fi
+
     - name: Create workspace directory to run xclarity
       file:
         path: '/tmp/xclarity'
         state: directory
-
-    - name: Remove old jobs repository
-      shell: |
-        cd /tmp/xclarity
-        if [[ -e LENOVO-CI-JOBS ]]; then
-          sudo rm -rf LENOVO-CI-JOBS
-        fi
 
     - block:
         - name: Clonning Lenovo defined jobs for xclarity
@@ -29,8 +29,8 @@
         #- name: Allocating test node
         #  command: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} X3650
     
-        - name: Running xclarity
-          shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
+        #- name: Running xclarity
+        #  shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
     
       #always:
       #  - name: Deallocating test node
