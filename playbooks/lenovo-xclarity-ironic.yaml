@@ -4,7 +4,7 @@
     - name: Remove old workspace
       file:
         path: '/tmp/xclarity'
-        state: directory
+        state: absent
 
     - name: Create workspace directory to run xclarity
       file:
