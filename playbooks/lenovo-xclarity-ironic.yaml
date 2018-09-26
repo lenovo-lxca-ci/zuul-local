@@ -27,8 +27,8 @@
         #- name: Allocating test node
         #  command: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} X3650
     
-        #- name: Running xclarity
-        #  shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
+        - name: Running xclarity
+          shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
     
       #always:
       #  - name: Deallocating test node
