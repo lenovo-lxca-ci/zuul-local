@@ -1,12 +1,10 @@
 - hosts: all
   name: Lenovo XClarity job
   tasks:
-    - name: Remove old jobs repository
-      shell: |
-        cd /tmp
-        if [[ -e xclarity ]]; then
-          sudo rm -rf xclarity
-        fi
+    - name: Remove old workspace
+      file:
+        path: '/tmp/xclarity'
+        state: directory
 
     - name: Create workspace directory to run xclarity
       file:
@@ -14,7 +12,7 @@
         state: directory
 
     - block:
-        - name: Clonning Lenovo defined jobs for xclarity
+        - name: Cloning Lenovo defined jobs for xclarity
           shell: |
             cd /tmp/xclarity
             git clone https://github.com/lenovo-lxca-ci/LENOVO-CI-JOBS.git
