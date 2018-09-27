@@ -25,7 +25,7 @@
         #  register: uuid
         #
         #- name: Allocating test node
-        #  command: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} X3650
+        #  command: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} static-vms
  
         #- name: Running xclarity
         #  shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
