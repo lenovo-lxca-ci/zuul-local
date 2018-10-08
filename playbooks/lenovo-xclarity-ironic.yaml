@@ -20,10 +20,10 @@
         - name: Configure molten
           shell: sudo bash /tmp/xclarity/LENOVO-CI-JOBS/molteniron/configure_molten.sh
 
-        #- name: Generate MoltenIron Id for node
-        #  command: uuidgen
-        #  register: uuid
-        #
+        - name: Generate MoltenIron Id for node
+          command: uuidgen
+          register: uuid
+ 
         #- name: Allocating test node
         #  command: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} static-vms
  
