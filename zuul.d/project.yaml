@@ -1,5 +1,5 @@
 - project:
-    name: openstack/ironic
+    #name: openstack/ironic
     name: openstack-dev/ci-sandbox
     check:
       jobs:
