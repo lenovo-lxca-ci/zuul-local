@@ -30,6 +30,6 @@
         #- name: Running xclarity
         #  shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
     
-      #always:
-      #  - name: Deallocating test node
-      #    shell: /tmp/xclarity/LENOVO-CI-JOBS/molteniron/release_molten.py {{ uuid.stdout }}
+      always:
+        - name: Deallocating test node
+          shell: python /tmp/xclarity/LENOVO-CI-JOBS/molteniron/release_molten.py {{ uuid.stdout }}
