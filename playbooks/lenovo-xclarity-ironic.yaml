@@ -4,7 +4,7 @@
     - name: Find old files to delete
       find:
         paths: /tmp
-        patterns: "*.log, *.service"
+        patterns: "*.log,*.service"
       register: files_to_delete
 
     - name: Remove old files
@@ -39,7 +39,7 @@
         - name: Allocating test node
           shell: python /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} static-vms
  
-        - name: Running xclarity
+        - name: Running xclarity gate
           shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
     
       always:
