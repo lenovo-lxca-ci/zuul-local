@@ -8,8 +8,8 @@
       nodes:
         - name: 10.240.24.147
           label: ubuntu-xenial
-        #- name: 10.240.24.138
-        #  label: ubuntu-xenial
+        - name: 10.240.24.138
+          label: ubuntu-xenial
         #- name: 10.240.24.144
         #  label: ubuntu-xenial
 
@@ -35,7 +35,7 @@
       nodes:
         - name: 10.240.24.147
           label: ubuntu-xenial
-        #- name: 10.240.24.138
-        #  label: ubuntu-xenial
+        - name: 10.240.24.138
+          label: ubuntu-xenial
         #- name: 10.240.24.144
         #  label: ubuntu-xenial
