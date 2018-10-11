@@ -8,10 +8,10 @@
       nodes:
         #- name: 10.240.24.147
         #  label: ubuntu-xenial
-        #- name: 10.240.24.138
-        #  label: ubuntu-xenial
-        - name: 10.240.24.144
+        - name: 10.240.24.138
           label: ubuntu-xenial
+        #- name: 10.240.24.144
+        #  label: ubuntu-xenial
 
 - job:
     name: lenovo-xclarity-ironic
@@ -35,7 +35,7 @@
       nodes:
         #- name: 10.240.24.147
         #  label: ubuntu-xenial
-        #- name: 10.240.24.138
-        #  label: ubuntu-xenial
-        - name: 10.240.24.144
+        - name: 10.240.24.138
           label: ubuntu-xenial
+        #- name: 10.240.24.144
+        #  label: ubuntu-xenial
