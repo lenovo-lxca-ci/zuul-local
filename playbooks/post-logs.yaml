@@ -33,7 +33,7 @@
         - name: Preparing logs
           copy:
             content: |
-              sshpass -p passw0rd ssh -o StrictHostKeyChecking=no root@10.240.24.140 "mkdir -p /srv/static/logs/{{ log_path }}/"
+              ssh -o StrictHostKeyChecking=no root@10.240.24.140 "mkdir -p /srv/static/logs/{{ log_path }}/"
               sshpass -p ironic2018 ssh -o StrictHostKeyChecking=no ironic@10.240.24.146 "sudo chown -R zuul.zuul {{ zuul.executor.log_root }}"
               sshpass -p ironic2018 ssh -o StrictHostKeyChecking=no ironic@10.240.24.146 "sudo chmod -R 0777 /tmp; sudo chown -R zuul.zuul /tmp"
               sshpass -p ironic2018 scp -o StrictHostKeyChecking=no -r ironic@10.240.24.146:{{ zuul.executor.log_root }} /tmp/new_zuul/
@@ -60,17 +60,17 @@
               if [ -d /etc/glance ]; then
                 sudo cp -r /etc/glance/ /etc/ironic/ /etc/keystone /etc/neutron /etc/nova /etc/swift /tmp/new_zuul/etc/
               fi
-              sshpass -p passw0rd scp -o StrictHostKeyChecking=no /tmp/*.service root@10.240.24.140:/srv/static/logs/{{ log_path }}/ 2>/dev/null
+              scp -o StrictHostKeyChecking=no /tmp/*.service root@10.240.24.140:/srv/static/logs/{{ log_path }}/ 2>/dev/null
           
               if [ -d /tmp/new_zuul ]; then
-                 echo "Pasting log path"
-                 sshpass -p passw0rd scp -o StrictHostKeyChecking=no -r /tmp/new_zuul/* root@10.240.24.140:/srv/static/logs/{{ log_path }}/
+                echo "Pasting log path"
+                scp -o StrictHostKeyChecking=no -r /tmp/new_zuul/* root@10.240.24.140:/srv/static/logs/{{ log_path }}/
               fi
               if [ -d /tmp/devstack_logs/ ]; then
-                 sshpass -p passw0rd scp -o StrictHostKeyChecking=no -r /tmp/devstack_logs/ root@10.240.24.140:/srv/static/logs/{{ log_path }}/
+                scp -o StrictHostKeyChecking=no -r /tmp/devstack_logs/ root@10.240.24.140:/srv/static/logs/{{ log_path }}/
               fi
               if [ -f /opt/stack/devstack/local.conf ]; then
-                sshpass -p passw0rd scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf root@10.240.24.140:/srv/static/logs/{{ log_path }}/local.conf
+                scp -o StrictHostKeyChecking=no /opt/stack/devstack/local.conf root@10.240.24.140:/srv/static/logs/{{ log_path }}/local.conf
               fi
             dest: "{{ tmpe.path }}"
             mode: 0777
