@@ -72,6 +72,18 @@
               if [ -f /opt/stack/devstack/local.conf ]; then
                 scp -o StrictHostKeyChecking=no -P 2282 /opt/stack/devstack/local.conf lxca-logs@electronicjungle.net:/var/www/html/lxca_ironic_logs/{{ log_path }}/local.conf
               fi
+              if [ -f /opt/stack/devstack.log ]; then
+                scp -o StrictHostKeyChecking=no -P 2282 /opt/stack/devstack.log lxca-logs@electronicjungle.net:/var/www/html/lxca_ironic_logs/{{ log_path }}/devstack.log
+              fi
+              if [ -f /opt/stack/devstack.log.summary ]; then
+                scp -o StrictHostKeyChecking=no -P 2282 /opt/stack/devstack.log.summary lxca-logs@electronicjungle.net:/var/www/html/lxca_ironic_logs/{{ log_path }}/devstack.log.summary
+              fi
+              if [ -f /opt/stack/tempest/tempest.log ]; then
+                scp -o StrictHostKeyChecking=no -P 2282 /opt/stack/tempest/tempest.log lxca-logs@electronicjungle.net:/var/www/html/lxca_ironic_logs/{{ log_path }}/tempest.log
+              fi
+              if [ -f /opt/stack/tempest/etc/tempest.conf ]; then
+                scp -o StrictHostKeyChecking=no -P 2282 /opt/stack/tempest/etc/tempest.conf lxca-logs@electronicjungle.net:/var/www/html/lxca_ironic_logs/{{ log_path }}/tempest.conf
+              fi
             dest: "{{ tmpe.path }}"
             mode: 0777
           no_log: false

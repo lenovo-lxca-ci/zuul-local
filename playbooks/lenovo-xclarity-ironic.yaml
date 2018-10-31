@@ -4,7 +4,7 @@
     - name: Find old files to delete
       find:
         paths: /tmp
-        patterns: "*.log,*.service"
+        patterns: "*.log,*.service,ansible.*"
       register: files_to_delete
 
     - name: Remove old files
