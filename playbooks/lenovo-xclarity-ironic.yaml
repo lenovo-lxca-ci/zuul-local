@@ -3,7 +3,7 @@
   tasks:
     - name: Find old files to delete
       find:
-        paths: /tmp
+        paths: '/tmp,/opt/stack/tempest'
         patterns: "*.log,*.service,ansible.*,tmp.*"
       register: files_to_delete
 
