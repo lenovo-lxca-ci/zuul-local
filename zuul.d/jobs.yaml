@@ -10,8 +10,8 @@
           label: ubuntu-xenial
         #- name: 10.240.24.138
         #  label: ubuntu-xenial
-        #- name: 10.240.24.144
-        #  label: ubuntu-xenial
+        - name: 10.240.24.144
+          label: ubuntu-xenial
 
 - job:
     name: lenovo-xclarity-ironic
@@ -37,5 +37,5 @@
           label: ubuntu-xenial
         #- name: 10.240.24.138
         #  label: ubuntu-xenial
-        #- name: 10.240.24.144
-        #  label: ubuntu-xenial
+        - name: 10.240.24.144
+          label: ubuntu-xenial
