@@ -41,6 +41,13 @@
  
         - name: Running xclarity gate
           shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
+
+        - name: Check gate status
+          shell: source /opt/stack/devstack/openrc admin admin && openstack baremetal node list
+          register: shell_result
+          fail:
+            msg: "XClarity driver deployment failed!"
+          when: "'failed' in shell_result.stdout"
     
       always:
         - name: Deallocating test node
