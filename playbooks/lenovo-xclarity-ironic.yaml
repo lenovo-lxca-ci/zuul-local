@@ -39,11 +39,11 @@
         - name: Allocating test node
           shell: python /tmp/xclarity/LENOVO-CI-JOBS/molteniron/allocate_molten.py {{ uuid.stdout }} static-vms
  
-        #- name: Running xclarity gate
-        #  shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
+        - name: Running xclarity gate
+          shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
 
         - name: Check gate status
-          shell: (source /opt/stack/devstack/openrc admin admin && openstack baremetal node list) | grep 'server-75'
+          shell: (source /opt/stack/devstack/openrc admin admin && openstack baremetal node list) | grep 'active'
           register: active_node
           args:
             executable: /bin/bash
