@@ -43,7 +43,7 @@
         #  shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
 
         - name: Check gate status
-          shell: (source /opt/stack/devstack/openrc admin admin && openstack baremetal node list) | grep 'active'
+          shell: (source /opt/stack/devstack/openrc admin admin && openstack baremetal node list) | grep 'server-75'
           register: active_node
           args:
             executable: /bin/bash
