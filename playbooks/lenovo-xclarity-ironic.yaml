@@ -48,7 +48,8 @@
           args:
             executable: /bin/bash
 
-        - debug: msg={{ active_node.stdout }}
+        - debug:
+            msg: "active_node.stdout is {{ active_node.stdout }}"
 
         - fail:
             msg: "XClarity driver deployment failed, baremtal node is NOT active!"
