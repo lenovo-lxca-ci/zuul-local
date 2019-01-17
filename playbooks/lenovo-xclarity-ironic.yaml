@@ -43,13 +43,10 @@
         #  shell: bash /tmp/xclarity/LENOVO-CI-JOBS/xclarity/gate.sh
 
         - name: Check gate status
-          shell: (source /opt/stack/devstack/openrc admin admin && openstack baremetal node list) | grep 'enroll'
+          shell: (source /opt/stack/devstack/openrc admin admin && openstack baremetal node list) | grep 'active'
           register: active_node
           args:
             executable: /bin/bash
-
-        - debug:
-            msg: "active_node.stdout is {{ active_node.stdout }}"
 
         - fail:
             msg: "XClarity driver deployment failed, baremtal node is NOT active!"
