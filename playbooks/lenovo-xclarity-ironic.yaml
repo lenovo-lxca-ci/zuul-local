@@ -53,7 +53,7 @@
 
         - fail:
             msg: "XClarity driver deployment failed, baremtal node is NOT active!"
-          when: active_node.stdout  == ''
+          when: active_node.stdout  != ''
     
       always:
         - name: Deallocating test node
