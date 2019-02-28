@@ -48,9 +48,9 @@
           args:
             executable: /bin/bash
 
-        - fail:
-            msg: "XClarity driver deployment failed, baremtal node is NOT active!"
-          when: active_node.stdout == ''
+        #- fail:
+        #    msg: "XClarity driver deployment failed, baremtal node is NOT active!"
+        #  when: active_node.stdout == ''
     
       always:
         - name: Deallocating test node
